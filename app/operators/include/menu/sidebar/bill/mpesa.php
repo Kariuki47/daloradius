@@ -111,7 +111,7 @@ $components[] = array(
                             "type" => "select",
                             "name" => "orderType",
                             "options" => array("asc" => "Ascending", "desc" => "Descending"),
-                            "selected_value" => ((isset($orderType)) ? $orderType : "asc")
+                            "selected_value" => ((isset($orderType)) ? $orderType : "desc")
                      );
 
 $descriptors1 = array();
