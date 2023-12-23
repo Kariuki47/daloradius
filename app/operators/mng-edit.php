@@ -273,7 +273,7 @@
 
                                     //~ "billstatus" => $bi_billstatus,
                                     //~ "lastbill" => $bi_lastbill,
-                                    //~ "nextbill" => $bi_nextbill,
+                                    "nextbill" => $bi_nextbill,
                                     "billdue" => $bi_billdue,
                                     "nextinvoicedue" => $bi_nextinvoicedue,
 
