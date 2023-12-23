@@ -52,7 +52,7 @@ if (!$exists) {
                                    $dbSocket->escapeSimple($transactionType), $dbSocket->escapeSimple($transID), $dbSocket->escapeSimple($transTime),
                                    $dbSocket->escapeSimple($transAmount), $dbSocket->escapeSimple($businessShortCode), $dbSocket->escapeSimple($billRefNumber),
                                    $dbSocket->escapeSimple($invoiceNumber), $dbSocket->escapeSimple($orgAccountBalance), $dbSocket->escapeSimple($thirdPartyTransID),
-                                   $dbSocket->escapeSimple($MSISDN), $dbSocket->escapeSimple($firstName), $dbSocket->escapeSimple($middleName), $dbSocket->escapeSimple($lastName), 'Completed');
+                                   $dbSocket->escapeSimple($MSISDN), $dbSocket->escapeSimple($firstName), $dbSocket->escapeSimple($middleName), $dbSocket->escapeSimple($lastName), 'In-Progress');
     $res = $dbSocket->query($sql);
     $logDebugSQL .= "$sql;\n";
 
@@ -104,12 +104,24 @@ if (!$exists) {
             // execute the insert/update onto userbillinfo
             $res = $dbSocket->query($sql);
             $logDebugSQL .= "$sql;\n";
+
+            $sql = sprintf("UPDATE %s SET `payment_status`='%s' WHERE `txn_id`='%s'", 'billing_mpesa', 'Completed', $dbSocket->escapeSimple($transID));
+
+            // execute the insert/update onto userbillinfo
+            $res = $dbSocket->query($sql);
+            $logDebugSQL .= "$sql;\n";
         }elseif($username){
             $currDate = date('Y-m-d H:i:s');
             $bi_billdue = intval($billdue) - intval($transAmount);
             $sql = sprintf("UPDATE %s SET `billdue`='%s', `updatedate`='%s', `updateby`='%s' WHERE `username`='%s'", 'userbillinfo',
                                                                         $dbSocket->escapeSimple($bi_billdue), $currDate, 'api',
                                                                         $dbSocket->escapeSimple($username));
+
+            // execute the insert/update onto userbillinfo
+            $res = $dbSocket->query($sql);
+            $logDebugSQL .= "$sql;\n";
+
+            $sql = sprintf("UPDATE %s SET `payment_status`='%s' WHERE `txn_id`='%s'", 'billing_mpesa', 'Processed', $dbSocket->escapeSimple($transID));
 
             // execute the insert/update onto userbillinfo
             $res = $dbSocket->query($sql);
