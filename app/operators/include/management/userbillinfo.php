@@ -101,8 +101,8 @@ $_input_descriptors3[] = array( 'caption' => t('all','BillStatus'), 'type' => 't
                                'value' => ((isset($bi_billstatus)) ? $bi_billstatus : ''), 'disabled' => true );
 $_input_descriptors3[] = array( 'caption' => t('all','LastBill'), 'type' => 'text',  'name' => 'bi_lastbill',
                                'value' => ((isset($bi_lastbill)) ? $bi_lastbill : ''), 'disabled' => true );
-$_input_descriptors3[] = array( 'caption' => t('all','NextBill'), 'type' => 'text',  'name' => 'bi_nextbill',
-                               'value' => ((isset($bi_nextbill)) ? $bi_nextbill : ''), 'disabled' => true );
+$_input_descriptors3[] = array( 'caption' => t('all','NextBill'), 'type' => 'datetime-local',  'name' => 'bi_nextbill',
+                               'value' => ((isset($bi_nextbill)) ? $bi_nextbill : ''), 'disabled' => false, "min" => date('Y-m-d H:i:s') );
 $_input_descriptors3[] = array( 'caption' => t('all','BillDue'), 'type' => 'text',  'name' => 'bi_billdue',
                                'value' => ((isset($bi_billdue)) ? $bi_billdue : '') );
 $_input_descriptors3[] = array( 'caption' => t('all','NextInvoiceDue'), 'type' => 'text', 'name' => 'bi_nextinvoicedue',
