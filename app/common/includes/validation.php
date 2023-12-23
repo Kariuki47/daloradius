@@ -252,8 +252,8 @@ $bill_mpesa_transactions_options_all = array(
                                                );
 
 $bill_mpesa_transactions_options_default = array(
-                                                "txn_id",
                                                 "payment_date",
+                                                "txn_id",
                                                 "payment_amount",
                                                 "ref_no",
                                                 "payer_phone",
