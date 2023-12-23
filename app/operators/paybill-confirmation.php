@@ -92,8 +92,21 @@ if (!$exists) {
             }
 
             $currDate = date('Y-m-d H:i:s');
+            //$bi_nextdate = new DateTime($currDate);
+            //$bi_nextdate->modify('+1 month');
+            $bi_nextdate = date('Y-m-d H:i:s',strtotime($currDate." +1 Months"));
             $bi_billdue = intval($billdue) - intval($transAmount);
 
+            $sql = sprintf("UPDATE %s SET `billdue`='%s', `nextbill`='%s', `updatedate`='%s', `updateby`='%s' WHERE `username`='%s'", 'userbillinfo',
+                                                                        $dbSocket->escapeSimple($bi_billdue), $bi_nextdate, $currDate, 'api',
+                                                                        $dbSocket->escapeSimple($username));
+
+            // execute the insert/update onto userbillinfo
+            $res = $dbSocket->query($sql);
+            $logDebugSQL .= "$sql;\n";
+        }elseif($username){
+            $currDate = date('Y-m-d H:i:s');
+            $bi_billdue = intval($billdue) - intval($transAmount);
             $sql = sprintf("UPDATE %s SET `billdue`='%s', `updatedate`='%s', `updateby`='%s' WHERE `username`='%s'", 'userbillinfo',
                                                                         $dbSocket->escapeSimple($bi_billdue), $currDate, 'api',
                                                                         $dbSocket->escapeSimple($username));
