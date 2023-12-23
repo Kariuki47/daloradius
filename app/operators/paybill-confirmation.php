@@ -90,6 +90,17 @@ if (!$exists) {
             } else {
                 $logAction .= sprintf('Enabled username: [%s] paid transaction ID: %s.', $username, $transID);
             }
+
+            $currDate = date('Y-m-d H:i:s');
+            $bi_billdue = intval($billdue) - intval($transAmount);
+
+            $sql = sprintf("UPDATE %s SET `billdue`='%s', `updatedate`='%s', `updateby`='%s' WHERE `username`='%s'", 'userbillinfo',
+                                                                        $dbSocket->escapeSimple($bi_billdue), $currDate, 'api',
+                                                                        $dbSocket->escapeSimple($username));
+
+            // execute the insert/update onto userbillinfo
+            $res = $dbSocket->query($sql);
+            $logDebugSQL .= "$sql;\n";
         }
         
     } else {

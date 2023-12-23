@@ -268,7 +268,7 @@ $valid_paymentStatus = array(
                               "Processed",  "Refunded",  "Reversed",  "Canceled-Reversal",  "Voided",
                             );
 $valid_vendorTypes = array( "Any", "2Checkout", "PayPal" );
-$valid_txnTypes = array( "Any", "Paybill", "Tillnumber" );
+$valid_txnTypes = array( "Any", "Pay Bill", "Buy Goods" );
 $valid_billactions = array( "Any", "Refill Session Time", "Refill Session Traffic" );
 
 $valid_planTypes = array( "Prepaid", "Postpaid", "2Checkout", "PayPal", );
